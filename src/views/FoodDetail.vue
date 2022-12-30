@@ -23,13 +23,24 @@
       <!-- product detail -->
       <div class="row mt-3">
         <div class="col-md-6">
-          <img
-            :src="'../assets/images/' + product.gambar"
-            class="card-img-top img-fulid shadow"
-            alt=""
-            height="auto"
-            width="auto"
-          />
+          <div class="row">
+            <img
+              :src="'../assets/images/' + images[0].url"
+              class="card-img-top img-fulid shadow"
+              alt=""
+              height="auto"
+              width="auto"
+            />
+          </div>
+          <div v-if="images.length > 1" class="row mt-4">
+            <div v-for="image in images" :key="image.id" class="col-md-3">
+              <img
+                :src="'../assets/images/' + image.url"
+                class="img-fulid shadow w-100 h-100"
+                alt=""
+              />
+            </div>
+          </div>
         </div>
         <div class="col-md-6 ml-2">
           <h2 class="mt-3">
@@ -75,17 +86,25 @@ export default {
   data() {
     return {
       product: [],
+      images: [],
     };
   },
   methods: {
     setProduct(data) {
       this.product = data;
     },
+    setImage(data) {
+      this.images = data;
+    },
   },
   mounted() {
     axios
       .get("http://localhost:3000/products/" + this.$route.params.id)
-      .then((response) => this.setProduct(response.data))
+      .then((response) => {
+        this.setProduct(response.data);
+        this.setImage(response.data.gambar);
+        console.log("images:", this.images);
+      })
       .catch((error) => console.log(error.message));
   },
 };

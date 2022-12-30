@@ -10,18 +10,19 @@
 
 .btn-checkout,
 .badge-success {
-  background-color: #541690;
+  background-color: #ff8d29;
   color: white;
 }
 
 .btn-checkout:hover {
   background-color: white;
-  color: #541690;
-  border-color: #541690;
+  color: #ff8d29;
+  border-color: #ff8d29;
 }
 
 .card-product,
-.card-img-top {
+.card-img-top,
+.card-disable {
   border-radius: 15px;
 }
 
