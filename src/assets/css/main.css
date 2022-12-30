@@ -8,12 +8,33 @@
   font-weight: bold;
 }
 
-.btn-success,
+.btn-checkout,
 .badge-success {
   background-color: #541690;
+  color: white;
 }
 
-.btn-success:hover {
+.btn-checkout:hover {
   background-color: white;
   color: #541690;
+  border-color: #541690;
+}
+
+.card-product,
+.card-img-top {
+  border-radius: 15px;
+}
+
+.breadcrumb {
+  background-color: transparent;
+  padding: 0;
+}
+
+.breadcrumb-item.active {
+  font-weight: bold;
+  color: black;
+}
+
+.form-group {
+  margin-bottom: 10px;
 }

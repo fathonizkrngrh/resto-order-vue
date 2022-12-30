@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import HomePage from "../views/HomePage.vue";
 import FoodMenu from "../views/FoodMenu.vue";
+import FoodDetail from "../views/FoodDetail.vue";
 
 Vue.use(VueRouter);
 
@@ -15,6 +16,11 @@ const routes = [
     path: "/foods",
     name: "Food Menu",
     component: FoodMenu,
+  },
+  {
+    path: "/food/:id",
+    name: "Food Detail",
+    component: FoodDetail,
   },
 ];
 
