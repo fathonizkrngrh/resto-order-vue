@@ -8,16 +8,23 @@
   font-weight: bold;
 }
 
+hr {
+  height: 5px;
+}
+
+th {
+  color: #541690;
+}
 .btn-checkout,
 .badge-success {
-  background-color: #ff8d29;
+  background-color: #541690;
   color: white;
 }
 
 .btn-checkout:hover {
   background-color: white;
-  color: #ff8d29;
-  border-color: #ff8d29;
+  color: #541690;
+  border-color: #541690;
 }
 
 .card-product,

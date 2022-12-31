@@ -24,10 +24,10 @@
         </ul>
         <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <router-link class="nav-link" to="/chart"
+            <router-link class="nav-link" to="/cart"
               >Keranjang
               <b-icon-bag></b-icon-bag>
-              <span class="badge badge-success ml-3"> 0 </span>
+              <span class="badge badge-success ml-3"> {{ cartValue }}</span>
             </router-link>
           </li>
         </ul>
@@ -37,8 +37,27 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "NavBar",
+  data() {
+    return {
+      cartValue: "",
+    };
+  },
+  mounted() {
+    axios
+      .get("http://localhost:3000/carts")
+      .then((response) => {
+        this.cartValue = response.data.length;
+        console.log("value :", this.cartValue);
+      })
+      .catch((error) => {
+        this.errored = true;
+        console.log(error.message);
+      });
+  },
 };
 </script>
 

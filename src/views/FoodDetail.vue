@@ -53,10 +53,15 @@
           <h4 class="mt-3">
             Harga : <strong>Rp. {{ product.harga }}</strong>
           </h4>
-          <form action="" class="mt-4">
+          <form action="" class="mt-4" v-on:submit.prevent>
             <div class="form-group">
               <label for="qty" class="form-label">Quantity</label>
-              <input type="number" id="qty" class="form-control" />
+              <input
+                type="number"
+                id="qty"
+                class="form-control"
+                v-model="orders.qty"
+              />
             </div>
             <div class="form-group">
               <label for="notes" class="form-label">Notes</label>
@@ -64,10 +69,11 @@
                 id="notes"
                 class="form-control"
                 placeholder="Add your notes, ex: Extra spicy, Without rice"
+                v-model="orders.notes"
               ></textarea>
             </div>
-            <button type="submit" class="btn btn-checkout float-end">
-              Order
+            <button type="submit" class="btn btn-checkout" @click="order">
+              Add to Cart
             </button>
           </form>
         </div>
@@ -87,8 +93,9 @@ export default {
   },
   data() {
     return {
-      product: [],
-      images: [],
+      product: {},
+      images: {},
+      orders: {},
     };
   },
   methods: {
@@ -99,8 +106,36 @@ export default {
       this.images = data;
     },
     changeImage(event) {
-      console.log(this.$refs.mainImage.src, "change to ->", event.target.src);
       this.$refs.mainImage.src = event.target.src;
+    },
+    order() {
+      this.orders.productId = this.product;
+      if (!this.orders.qty) {
+        this.$swal.fire({
+          icon: "error",
+          title: "Failed",
+          text: "Please add your quantity",
+        });
+      } else {
+        axios
+          .post("http://localhost:3000/carts", this.orders)
+          .then(() => {
+            this.$swal
+              .fire({
+                title: "Thank You",
+                text: "Success add to your cart",
+                icon: "success",
+                showCancelButton: true,
+                confirmButtonText: "View Cart",
+              })
+              .then((result) => {
+                if (result.isConfirmed) {
+                  this.$router.push({ path: "/cart" });
+                }
+              });
+          })
+          .catch((err) => console.log(err));
+      }
     },
   },
   mounted() {

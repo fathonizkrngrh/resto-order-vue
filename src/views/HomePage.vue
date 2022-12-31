@@ -5,31 +5,21 @@
       <HerroBanner />
 
       <!-- Desktop -->
-      <div class="d-none d-md-block">
-        <div class="row mt-5">
-          <div class="col">
-            <h2><strong>Best</strong> Foods</h2>
-          </div>
-          <div class="col">
+      <div class="row mt-5">
+        <div class="col-2 col-md-4">
+          <hr />
+        </div>
+        <div class="col-8 col-md-4">
+          <h2 class="text-center"><strong>Popular</strong> Foods</h2>
+        </div>
+        <div class="col-2 col-md-4">
+          <hr />
+        </div>
+        <!-- <div class="col">
             <router-link to="/foods" class="btn btn-md btn-checkout float-end">
               <b-icon-eye></b-icon-eye> See All Menu</router-link
             >
-          </div>
-        </div>
-      </div>
-      <!-- Mobile -->
-      <div class="d-sm-block d-md-none">
-        <div class="row mt-4 mx-2">
-          <div class="col-md-6">
-            <h2><strong>Best</strong> Foods</h2>
-          </div>
-
-          <div class="col-md-6">
-            <router-link to="/foods" class="btn btn-md btn-checkout">
-              <b-icon-eye></b-icon-eye> See All Menu</router-link
-            >
-          </div>
-        </div>
+          </div> -->
       </div>
 
       <div class="row mb-4 mt-3 px-2 px-md-0">
