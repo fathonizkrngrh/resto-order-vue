@@ -111,30 +111,31 @@ export default {
     order() {
       this.orders.productId = this.product;
       if (!this.orders.qty) {
-        this.$swal.fire({
-          icon: "error",
-          title: "Failed",
-          text: "Please add your quantity",
+        this.$toast.warning("Please insert your quantity", {
+          position: "top-right",
+          timeout: 3000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          showCloseButtonOnHover: true,
+          hideProgressBar: true,
+          closeButton: "button",
+          rtl: false,
         });
       } else {
         axios
           .post("http://localhost:3000/carts", this.orders)
           .then(() => {
-            this.$swal
-              .fire({
-                title: "Thank You",
-                text: "Success add to your cart",
-                icon: "success",
-                showCancelButton: true,
-                confirmButtonText: "View Cart",
-              })
-              .then((result) => {
-                if (result.isConfirmed) {
-                  this.$router.push({ path: "/cart" });
-                } else {
-                  this.$router.push({ path: "/foods" });
-                }
-              });
+            this.$toast.success("Success add to cart", {
+              position: "top-right",
+              timeout: 3000,
+              closeOnClick: true,
+              pauseOnHover: true,
+              showCloseButtonOnHover: true,
+              hideProgressBar: true,
+              closeButton: "button",
+              rtl: false,
+            });
+            this.$router.push({ path: "/cart" });
           })
           .catch((err) => console.log(err));
       }

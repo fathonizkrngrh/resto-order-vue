@@ -1,6 +1,6 @@
 <template>
   <div class="cart">
-    <NavBar />
+    <NavBar :updateCart="productCarts" />
     <div class="container">
       <!-- breadcrumb -->
       <div class="row">
@@ -27,7 +27,11 @@
 
       <div class="row mt-4">
         <div class="col-12 col-md-8 table-responsive">
-          <table class="table align-middle">
+          <h3 v-if="productCarts.length === 0" class="text-center my-5">
+            Card is empty. Choose your
+            <router-link to="/foods">foods</router-link> and checkout.
+          </h3>
+          <table class="table align-middle" v-if="productCarts.length > 0">
             <thead>
               <tr>
                 <th scope="col">No.</th>
@@ -49,13 +53,18 @@
                 <td>{{ productCart.qty }}</td>
                 <td class="text-end">Rp. {{ productCart.productId.harga }}</td>
                 <td class="text-end">
-                  <strong>Rp. {{ productCart.productId.harga }}</strong>
+                  <strong
+                    >Rp.
+                    {{ productCart.productId.harga * productCart.qty }}</strong
+                  >
                 </td>
                 <td>
                   {{ productCart.notes }}
                 </td>
                 <td>
-                  <b-icon-trash></b-icon-trash>
+                  <b-icon-trash
+                    @click="deleteProductInCart(productCart.id)"
+                  ></b-icon-trash>
                 </td>
               </tr>
             </tbody>
@@ -70,7 +79,9 @@
                   <p>Subtotal {{ productCarts.length }} products</p>
                 </div>
                 <div class="col-5">
-                  <p class="text-end"><strong>Rp. 50.000</strong></p>
+                  <p class="text-end">
+                    <strong>Rp. {{ subtotalPrice }}</strong>
+                  </p>
                 </div>
               </div>
               <div class="row">
@@ -78,7 +89,9 @@
                   <p>Tax (10%)</p>
                 </div>
                 <div class="col-5">
-                  <p class="text-end"><strong>Rp. 5.000</strong></p>
+                  <p class="text-end">
+                    <strong>Rp. {{ tax(subtotalPrice) }}</strong>
+                  </p>
                 </div>
               </div>
 
@@ -89,9 +102,14 @@
                 </div>
                 <div class="col-7">
                   <h4 class="text-end">
-                    <strong>Rp. {{ totalPrice }}</strong>
+                    <strong
+                      >Rp. {{ subtotalPrice + tax(subtotalPrice) }}</strong
+                    >
                   </h4>
                 </div>
+              </div>
+              <div class="row mt-3">
+                <button type="submit" class="btn btn-checkout">Order</button>
               </div>
             </div>
           </div>
@@ -119,23 +137,49 @@ export default {
     setProductCart(data) {
       this.productCarts = data;
     },
+    deleteProductInCart(id) {
+      axios.delete("http://localhost:3000/carts/" + id).then((response) => {
+        console.log("http://localhost:3000/carts/" + id);
+        console.log("response:", response.data);
+        this.$toast.success("Success delete product", {
+          position: "top-right",
+          timeout: 3000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          showCloseButtonOnHover: true,
+          hideProgressBar: true,
+          closeButton: "button",
+          rtl: false,
+        });
+        //update cart
+        axios
+          .get("http://localhost:3000/carts")
+          .then((response) => {
+            this.setProductCart(response.data);
+          })
+          .catch((error) => console.log(error.message));
+      });
+    },
+
+    tax(subtotalPrice) {
+      return subtotalPrice * 0.1;
+    },
   },
   mounted() {
     axios
       .get("http://localhost:3000/carts")
       .then((response) => {
         this.setProductCart(response.data);
-        console.log(this.productCarts);
       })
       .catch((error) => console.log(error.message));
   },
-  computed(){
-    totalPrice() {
-        return this.productCarts.reduce(function(items, data) {
-            return items + (data.productId.harga * data.qty);
-        }, 0)
-    }
-  }
+  computed: {
+    subtotalPrice() {
+      return this.productCarts.reduce(function (items, data) {
+        return items + data.productId.harga * data.qty;
+      }, 0);
+    },
+  },
 };
 </script>
 

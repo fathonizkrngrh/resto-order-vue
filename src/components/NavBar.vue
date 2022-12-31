@@ -22,12 +22,14 @@
             <router-link class="nav-link" to="/foods">Foods</router-link>
           </li>
         </ul>
-        <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav mb-2">
           <li class="nav-item">
             <router-link class="nav-link" to="/cart"
               >Keranjang
-              <b-icon-bag></b-icon-bag>
-              <span class="badge badge-success ml-3"> {{ cartValue }}</span>
+              <b-icon-bag class=""></b-icon-bag>
+              <p class="badge badge-success ml-1">
+                {{ updateCart ? updateCart.length : cartValue }}
+              </p>
             </router-link>
           </li>
         </ul>
@@ -46,6 +48,7 @@ export default {
       cartValue: "",
     };
   },
+  props: ["updateCart"],
   mounted() {
     axios
       .get("http://localhost:3000/carts")
