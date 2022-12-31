@@ -32,9 +32,9 @@
         </div>
       </div>
 
-      <div class="row mb-4">
+      <div class="row mb-4 mt-3 px-2 px-md-0">
         <div
-          class="col-xs-6 col-md-3 mt-4"
+          class="col-6 col-md-3 mt-2 mt-md-4 px-1 px-md-2"
           v-for="product in products"
           :key="product.id"
         >

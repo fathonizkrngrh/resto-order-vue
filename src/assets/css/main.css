@@ -39,3 +39,15 @@
 .form-group {
   margin-bottom: 10px;
 }
+
+#image-tab:hover {
+  opacity: 1;
+}
+#image-tab {
+  opacity: 0.8;
+  cursor: pointer;
+  height: 80px;
+}
+#main-image {
+  height: 300px;
+}

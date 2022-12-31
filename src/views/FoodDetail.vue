@@ -26,18 +26,20 @@
           <div class="row">
             <img
               :src="'../assets/images/' + images[0].url"
-              class="card-img-top img-fulid shadow"
+              class="img-fulid shadow w-100"
               alt=""
-              height="auto"
-              width="auto"
+              id="main-image"
+              ref="mainImage"
             />
           </div>
           <div v-if="images.length > 1" class="row mt-4">
-            <div v-for="image in images" :key="image.id" class="col-md-3">
+            <div v-for="image in images" :key="image.id" class="col-4">
               <img
                 :src="'../assets/images/' + image.url"
-                class="img-fulid shadow w-100 h-100"
+                class="img-fulid shadow w-100"
                 alt=""
+                @click="changeImage"
+                id="image-tab"
               />
             </div>
           </div>
@@ -95,6 +97,10 @@ export default {
     },
     setImage(data) {
       this.images = data;
+    },
+    changeImage(event) {
+      console.log(this.$refs.mainImage.src, "change to ->", event.target.src);
+      this.$refs.mainImage.src = event.target.src;
     },
   },
   mounted() {
