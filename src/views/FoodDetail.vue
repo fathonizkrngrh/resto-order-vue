@@ -131,6 +131,8 @@ export default {
               .then((result) => {
                 if (result.isConfirmed) {
                   this.$router.push({ path: "/cart" });
+                } else {
+                  this.$router.push({ path: "/foods" });
                 }
               });
           })

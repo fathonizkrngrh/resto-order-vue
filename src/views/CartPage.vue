@@ -32,25 +32,36 @@
               <tr>
                 <th scope="col">No.</th>
                 <th scope="col">Product Name</th>
-                <th scope="col">Quantity</th>
+                <th scope="col">Qty</th>
                 <th scope="col">Price</th>
+                <th scope="col">Total Price</th>
                 <th scope="col">Notes</th>
+                <th scope="col">Delete</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="productCart in productCarts" :key="productCart.id">
-                <th scope="row">{{ productCart.id }}</th>
+              <tr
+                v-for="(productCart, index) in productCarts"
+                :key="productCart.id"
+              >
+                <th scope="row">{{ index + 1 }}</th>
                 <td>{{ productCart.productId.nama }}</td>
                 <td>{{ productCart.qty }}</td>
-                <td>{{ productCart.productId.harga }}</td>
+                <td class="text-end">Rp. {{ productCart.productId.harga }}</td>
+                <td class="text-end">
+                  <strong>Rp. {{ productCart.productId.harga }}</strong>
+                </td>
                 <td>
                   {{ productCart.notes }}
+                </td>
+                <td>
+                  <b-icon-trash></b-icon-trash>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div class="col-0 col-md-4">
+        <div class="col-0 col-md-4 fixed">
           <div class="card">
             <div class="card-body">
               <p class="text-right"><strong>Preview Order</strong></p>
@@ -77,7 +88,9 @@
                   <p>Price Total</p>
                 </div>
                 <div class="col-7">
-                  <h4 class="text-end"><strong>Rp. 55.000</strong></h4>
+                  <h4 class="text-end">
+                    <strong>Rp. {{ totalPrice }}</strong>
+                  </h4>
                 </div>
               </div>
             </div>
@@ -116,6 +129,13 @@ export default {
       })
       .catch((error) => console.log(error.message));
   },
+  computed(){
+    totalPrice() {
+        return this.productCarts.reduce(function(items, data) {
+            return items + (data.productId.harga * data.qty);
+        }, 0)
+    }
+  }
 };
 </script>
 
