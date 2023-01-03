@@ -25,7 +25,7 @@
         <div class="col-md-6">
           <div class="row">
             <img
-              :src="'../assets/images/' + images[0].url"
+              :src="'http://localhost:8080/' + images[0].imageUrl"
               class="img-fulid shadow w-100"
               alt=""
               id="main-image"
@@ -35,7 +35,7 @@
           <div v-if="images.length > 1" class="row mt-4">
             <div v-for="image in images" :key="image.id" class="col-4">
               <img
-                :src="'../assets/images/' + image.url"
+                :src="'http://localhost:8080/' + image.imageUrl"
                 class="img-fulid shadow w-100"
                 alt=""
                 @click="changeImage"
@@ -47,11 +47,11 @@
         <div class="col-md-6 ml-2">
           <h2 class="mt-3">
             <strong>
-              {{ product.nama }}
+              {{ product.name }}
             </strong>
           </h2>
           <h4 class="mt-3">
-            Harga : <strong>Rp. {{ product.harga }}</strong>
+            Harga : <strong>Rp. {{ product.price }}</strong>
           </h4>
           <form action="" class="mt-4" v-on:submit.prevent>
             <div class="form-group">
@@ -143,10 +143,10 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:3000/products/" + this.$route.params.id)
+      .get("http://localhost:8080/api/product/" + this.$route.params.id)
       .then((response) => {
-        this.setProduct(response.data);
-        this.setImage(response.data.gambar);
+        this.setProduct(response.data.data);
+        this.setImage(response.data.data.imageId);
         console.log("images:", this.images);
       })
       .catch((error) => console.log(error.message));

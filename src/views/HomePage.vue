@@ -60,10 +60,10 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:3000/products/?isPopular=true")
+      .get("http://localhost:8080/api/popular-product")
       .then((response) => {
-        this.setProducts(response.data);
-        // console.log("berhasil :", this.products);
+        this.setProducts(response.data.data);
+        console.log("berhasil :", this.products);
       })
       .catch((error) => {
         this.errored = true;
