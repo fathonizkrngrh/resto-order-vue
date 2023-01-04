@@ -32,7 +32,7 @@
               ref="mainImage"
             />
           </div>
-          <div v-if="images.length > 1" class="row mt-4">
+          <!-- <div v-if="images.length > 1" class="row mt-4">
             <div v-for="image in images" :key="image.id" class="col-4">
               <img
                 :src="'http://localhost:8080/' + image.imageUrl"
@@ -42,7 +42,7 @@
                 id="image-tab"
               />
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="col-md-6 ml-2">
           <h2 class="mt-3">
@@ -123,7 +123,10 @@ export default {
         });
       } else {
         axios
-          .post("http://localhost:3000/carts", this.orders)
+          .post(
+            "http://localhost:8080/api/cart/" + this.$route.params.id,
+            this.orders
+          )
           .then(() => {
             this.$toast.success("Success add to cart", {
               position: "top-right",

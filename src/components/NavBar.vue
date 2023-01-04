@@ -51,9 +51,9 @@ export default {
   props: ["updateCart"],
   mounted() {
     axios
-      .get("http://localhost:3000/carts")
+      .get("http://localhost:8080/api/cart")
       .then((response) => {
-        this.cartValue = response.data.length;
+        this.cartValue = response.data.data.length;
         console.log("value :", this.cartValue);
       })
       .catch((error) => {

@@ -153,9 +153,9 @@ export default {
         });
         //update cart
         axios
-          .get("http://localhost:3000/carts")
+          .get("http://localhost:8080/api/cart")
           .then((response) => {
-            this.setProductCart(response.data);
+            this.setProductCart(response.data.data);
           })
           .catch((error) => console.log(error.message));
       });
@@ -167,9 +167,9 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:3000/carts")
+      .get("http://localhost:8080/api/cart")
       .then((response) => {
-        this.setProductCart(response.data);
+        this.setProductCart(response.data.data);
       })
       .catch((error) => console.log(error.message));
   },
