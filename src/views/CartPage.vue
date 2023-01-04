@@ -46,24 +46,21 @@
             <tbody>
               <tr
                 v-for="(productCart, index) in productCarts"
-                :key="productCart.id"
+                :key="productCart._id"
               >
                 <th scope="row">{{ index + 1 }}</th>
-                <td>{{ productCart.productId.nama }}</td>
+                <td>{{ productCart.productId.name }}</td>
                 <td>{{ productCart.qty }}</td>
-                <td class="text-end">Rp. {{ productCart.productId.harga }}</td>
+                <td class="text-end">Rp. {{ productCart.productId.price }}</td>
                 <td class="text-end">
-                  <strong
-                    >Rp.
-                    {{ productCart.productId.harga * productCart.qty }}</strong
-                  >
+                  <strong>Rp. {{ productCart.subtotal }}</strong>
                 </td>
                 <td>
                   {{ productCart.notes }}
                 </td>
                 <td>
                   <b-icon-trash
-                    @click="deleteProductInCart(productCart.id)"
+                    @click="deleteProductInCart(productCart._id)"
                   ></b-icon-trash>
                 </td>
               </tr>
@@ -80,7 +77,7 @@
                 </div>
                 <div class="col-5">
                   <p class="text-end">
-                    <strong>Rp. {{ subtotalPrice }}</strong>
+                    <strong>Rp. {{ totalBeforeTax }}</strong>
                   </p>
                 </div>
               </div>
@@ -90,7 +87,7 @@
                 </div>
                 <div class="col-5">
                   <p class="text-end">
-                    <strong>Rp. {{ tax(subtotalPrice) }}</strong>
+                    <strong>Rp. {{ tax(totalBeforeTax) }}</strong>
                   </p>
                 </div>
               </div>
@@ -103,7 +100,7 @@
                 <div class="col-7">
                   <h4 class="text-end">
                     <strong
-                      >Rp. {{ subtotalPrice + tax(subtotalPrice) }}</strong
+                      >Rp. {{ tax(totalBeforeTax) + totalBeforeTax }}</strong
                     >
                   </h4>
                 </div>
@@ -131,6 +128,8 @@ export default {
   data() {
     return {
       productCarts: {},
+      message: {},
+      total: "",
     };
   },
   methods: {
@@ -138,9 +137,7 @@ export default {
       this.productCarts = data;
     },
     deleteProductInCart(id) {
-      axios.delete("http://localhost:3000/carts/" + id).then((response) => {
-        console.log("http://localhost:3000/carts/" + id);
-        console.log("response:", response.data);
+      axios.delete("http://localhost:8080/api/cart/" + id).then(() => {
         this.$toast.success("Success delete product", {
           position: "top-right",
           timeout: 3000,
@@ -157,7 +154,10 @@ export default {
           .then((response) => {
             this.setProductCart(response.data.data);
           })
-          .catch((error) => console.log(error.message));
+          .catch((error) => {
+            this.message = error.message;
+            console.log(error.message);
+          });
       });
     },
 
@@ -170,13 +170,14 @@ export default {
       .get("http://localhost:8080/api/cart")
       .then((response) => {
         this.setProductCart(response.data.data);
+        console.log(this.productCarts.length);
       })
       .catch((error) => console.log(error.message));
   },
   computed: {
-    subtotalPrice() {
-      return this.productCarts.reduce(function (items, data) {
-        return items + data.productId.harga * data.qty;
+    totalBeforeTax() {
+      return this.productCarts.reduce(function (item, data) {
+        return item + data.productId.price * data.qty;
       }, 0);
     },
   },
