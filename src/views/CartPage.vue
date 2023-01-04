@@ -106,7 +106,11 @@
                 </div>
               </div>
               <div class="row mt-3">
-                <button type="submit" class="btn btn-checkout">Order</button>
+                <!-- <b-button class="btn btn-checkout" v-b-modal="'my-modal'">
+                  Order
+                </b-button> -->
+
+                <ModalOrder :product="productCarts" />
               </div>
             </div>
           </div>
@@ -118,18 +122,19 @@
 
 <script>
 import NavBar from "../components/NavBar.vue";
+import ModalOrder from "../components/ModalOrder.vue";
 import axios from "axios";
 
 export default {
   name: "CartPage",
   components: {
     NavBar,
+    ModalOrder,
   },
   data() {
     return {
       productCarts: {},
       message: {},
-      total: "",
     };
   },
   methods: {
@@ -170,7 +175,6 @@ export default {
       .get("http://localhost:8080/api/cart")
       .then((response) => {
         this.setProductCart(response.data.data);
-        console.log(this.productCarts.length);
       })
       .catch((error) => console.log(error.message));
   },
