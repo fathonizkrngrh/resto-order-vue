@@ -106,11 +106,31 @@
                 </div>
               </div>
               <div class="row mt-3">
-                <!-- <b-button class="btn btn-checkout" v-b-modal="'my-modal'">
-                  Order
-                </b-button> -->
-
-                <ModalOrder :product="productCarts" />
+                <form>
+                  <div class="mb-3">
+                    <label for="username" class="form-label"
+                      >Orderer Name</label
+                    >
+                    <input
+                      type="username"
+                      class="form-control"
+                      id="username"
+                      placeholder="Please enter your name"
+                      required
+                    />
+                  </div>
+                  <select class="form-select" aria-label="Your table number">
+                    <option selected>Please select your table number</option>
+                    <option
+                      v-for="option in options"
+                      :key="option.value"
+                      :value="option.value"
+                    >
+                      {{ option.value }}
+                    </option>
+                  </select>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
               </div>
             </div>
           </div>
@@ -122,19 +142,26 @@
 
 <script>
 import NavBar from "../components/NavBar.vue";
-import ModalOrder from "../components/ModalOrder.vue";
 import axios from "axios";
 
 export default {
   name: "CartPage",
   components: {
     NavBar,
-    ModalOrder,
   },
   data() {
     return {
       productCarts: {},
       message: {},
+      options: [
+        { value: 1 },
+        { value: 2 },
+        { value: 3 },
+        { value: 4 },
+        { value: 5 },
+        { value: 6 },
+      ],
+      cartOrdered: {},
     };
   },
   methods: {
