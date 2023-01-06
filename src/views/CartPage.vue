@@ -134,7 +134,9 @@
                     />
                   </div>
 
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-checkout">
+                    Order Now
+                  </button>
                 </form>
               </div>
             </div>
@@ -195,8 +197,9 @@ export default {
     },
     order(event) {
       event.preventDefault();
+      console.log(this.cartOrdered);
       axios
-        .post("http://localhost:8080/api/order", this.cardOrdered)
+        .post("http://localhost:8080/api/order", this.cartOrdered)
         .then(() => {
           this.$toast.success("Success order product", {
             position: "top-right",
@@ -209,6 +212,7 @@ export default {
           });
         })
         .catch((err) => {
+          console.log(err);
           this.$toast.error(err.message, {
             position: "top-right",
             timeout: 5000,
