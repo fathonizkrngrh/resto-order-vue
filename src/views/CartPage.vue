@@ -210,6 +210,16 @@ export default {
             hideProgressBar: true,
             rtl: false,
           });
+          //update cart
+          axios
+            .get("http://localhost:8080/api/cart")
+            .then((response) => {
+              this.setProductCart(response.data.data);
+            })
+            .catch((error) => {
+              this.message = error.message;
+              console.log(error.message);
+            });
         })
         .catch((err) => {
           console.log(err);
@@ -232,7 +242,19 @@ export default {
       .then((response) => {
         this.setProductCart(response.data.data);
       })
-      .catch((error) => console.log(error.message));
+      .catch((error) => {
+        console.log(error.message);
+        this.$toast.error(error.message, {
+          position: "top-right",
+          timeout: 5000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          showCloseButtonOnHover: true,
+          hideProgressBar: true,
+          closeButton: "button",
+          rtl: false,
+        });
+      });
   },
   computed: {
     totalBeforeTax() {
