@@ -106,29 +106,34 @@
                 </div>
               </div>
               <div class="row mt-3">
-                <form>
+                <form @submit="order">
                   <div class="mb-3">
                     <label for="username" class="form-label"
                       >Orderer Name</label
                     >
                     <input
-                      type="username"
+                      type="text"
                       class="form-control"
                       id="username"
-                      placeholder="Please enter your name"
+                      placeholder="Enter your name"
+                      v-model="cartOrdered.username"
                       required
                     />
                   </div>
-                  <select class="form-select" aria-label="Your table number">
-                    <option selected>Please select your table number</option>
-                    <option
-                      v-for="option in options"
-                      :key="option.value"
-                      :value="option.value"
+                  <div class="mb-3">
+                    <label for="tablenumber" class="form-label"
+                      >Table Number</label
                     >
-                      {{ option.value }}
-                    </option>
-                  </select>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="tableNumber"
+                      placeholder="Enter your table number"
+                      v-model="cartOrdered.tableNumber"
+                      required
+                    />
+                  </div>
+
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
               </div>
@@ -153,14 +158,6 @@ export default {
     return {
       productCarts: {},
       message: {},
-      options: [
-        { value: 1 },
-        { value: 2 },
-        { value: 3 },
-        { value: 4 },
-        { value: 5 },
-        { value: 6 },
-      ],
       cartOrdered: {},
     };
   },
@@ -195,6 +192,34 @@ export default {
 
     tax(subtotalPrice) {
       return subtotalPrice * 0.1;
+    },
+    order(event) {
+      event.preventDefault();
+      axios
+        .post("http://localhost:8080/api/order", this.cardOrdered)
+        .then(() => {
+          this.$toast.success("Success order product", {
+            position: "top-right",
+            timeout: 3000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            showCloseButtonOnHover: true,
+            hideProgressBar: true,
+            rtl: false,
+          });
+        })
+        .catch((err) => {
+          this.$toast.error(err.message, {
+            position: "top-right",
+            timeout: 5000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            showCloseButtonOnHover: true,
+            hideProgressBar: true,
+            closeButton: "button",
+            rtl: false,
+          });
+        });
     },
   },
   mounted() {
