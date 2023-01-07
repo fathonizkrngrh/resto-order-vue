@@ -45,7 +45,7 @@
       </div>
       <div class="row mt-4">
         <div v-for="category in categories" :key="category._id">
-          <div class="row mt-5" v-if="category.productId.length > 0">
+          <div class="row py-3" v-if="category.productId.length > 0">
             <div class="col-2 col-md-4">
               <hr />
             </div>

@@ -67,7 +67,7 @@
             </tbody>
           </table>
         </div>
-        <div class="col-0 col-md-4 fixed">
+        <div class="col-0 col-md-4 fixed" v-if="productCarts.length > 0">
           <div class="card">
             <div class="card-body">
               <p class="text-right"><strong>Preview Order</strong></p>
