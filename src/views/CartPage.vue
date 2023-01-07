@@ -210,16 +210,9 @@ export default {
             hideProgressBar: true,
             rtl: false,
           });
-          //update cart
-          axios
-            .get("http://localhost:8080/api/cart")
-            .then((response) => {
-              this.setProductCart(response.data.data);
-            })
-            .catch((error) => {
-              this.message = error.message;
-              console.log(error.message);
-            });
+          // lempar ke success page
+
+          this.$router.push({ path: "/success-order" });
         })
         .catch((err) => {
           console.log(err);
