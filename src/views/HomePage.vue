@@ -41,6 +41,7 @@ import HerroBanner from "../components/HerroBanner.vue";
 import CardProduct from "../components/CardProduct.vue";
 import axios from "axios";
 
+
 export default {
   name: "HomePage",
   components: {
@@ -56,14 +57,17 @@ export default {
   methods: {
     setProducts(data) {
       this.products = data;
+
+      if (data.token) {
+      localStorage.setItem('user', data.user);
+    }
     },
   },
   mounted() {
     axios
-      .get("http://localhost:8080/api/popular-product")
+      .get(`${process.env.BE_URL}api/popular-product`)
       .then((response) => {
         this.setProducts(response.data.data);
-        console.log("berhasil :", this.products);
       })
       .catch((error) => {
         this.errored = true;

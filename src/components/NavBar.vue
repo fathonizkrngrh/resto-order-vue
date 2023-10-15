@@ -51,10 +51,9 @@ export default {
   props: ["updateCart"],
   mounted() {
     axios
-      .get("http://localhost:8080/api/cart")
+      .get(`${process.env.BE_URL}api/cart`)
       .then((response) => {
         this.cartValue = response.data.data.length;
-        console.log("value :", this.cartValue);
       })
       .catch((error) => {
         this.errored = true;

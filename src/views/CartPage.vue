@@ -168,7 +168,7 @@ export default {
       this.productCarts = data;
     },
     deleteProductInCart(id) {
-      axios.delete("http://localhost:8080/api/cart/" + id).then(() => {
+      axios.delete(`${process.env.BE_URL}api/cart/` + id).then(() => {
         this.$toast.success("Success delete product", {
           position: "top-right",
           timeout: 3000,
@@ -181,7 +181,7 @@ export default {
         });
         //update cart
         axios
-          .get("http://localhost:8080/api/cart")
+          .get(`${process.env.BE_URL}api/cart`)
           .then((response) => {
             this.setProductCart(response.data.data);
           })
@@ -199,7 +199,7 @@ export default {
       event.preventDefault();
       console.log(this.cartOrdered);
       axios
-        .post("http://localhost:8080/api/order", this.cartOrdered)
+        .post(`${process.env.BE_URL}api/order`, this.cartOrdered)
         .then(() => {
           this.$toast.success("Success order product", {
             position: "top-right",
@@ -231,7 +231,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:8080/api/cart")
+      .get(`${process.env.BE_URL}api/cart`)
       .then((response) => {
         this.setProductCart(response.data.data);
       })

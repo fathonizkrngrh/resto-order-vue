@@ -2,7 +2,7 @@
   <div>
     <div v-if="product.isReady === true" class="card shadow card-product">
       <img
-        :src="'http://localhost:8080/' + product.imageId[0].imageUrl"
+        :src= "getImageUrl(product.imageId[0].imageUrl)"
         class="card-img-top img-fulid p-1"
         alt=""
         height="150px"
@@ -21,7 +21,7 @@
     <div v-if="product.isReady === false" class="card shadow card-product">
       <div class="bg-image">
         <img
-          :src="'http://localhost:8080/' + product.imageId[0].imageUrl"
+          :src="getImageUrl(product.imageId[0].imageUrl)"
           class="card-img-top img-fulid p-1"
           alt=""
           height="150px"
@@ -53,6 +53,11 @@
 export default {
   name: "CardProduct",
   props: ["product"],
+  methods: {
+    getImageUrl(imagePath) {
+      return process.env.BE_URL + imagePath;
+    },
+  },
 };
 </script>
 

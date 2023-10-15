@@ -114,7 +114,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:8080/api/category")
+      .get(`${process.env.BE_URL}api/category`)
       .then((response) => {
         this.setCategories(response.data.data);
         console.log("berhasil :", this.categories);

@@ -25,7 +25,7 @@
         <div class="col-md-6">
           <div class="row">
             <img
-              :src="'http://localhost:8080/' + images[0].imageUrl"
+              :src= "getImageUrl(images[0].imageUrl)"
               class="img-fulid shadow w-100"
               alt=""
               id="main-image"
@@ -35,7 +35,7 @@
           <!-- <div v-if="images.length > 1" class="row mt-4">
             <div v-for="image in images" :key="image.id" class="col-4">
               <img
-                :src="'http://localhost:8080/' + image.imageUrl"
+                :src="process.env.BE_URL + image.imageUrl"
                 class="img-fulid shadow w-100"
                 alt=""
                 @click="changeImage"
@@ -124,7 +124,7 @@ export default {
       } else {
         axios
           .post(
-            "http://localhost:8080/api/cart/" + this.$route.params.id,
+            `${process.env.BE_URL}api/cart/` + this.$route.params.id,
             this.orders
           )
           .then(() => {
@@ -143,10 +143,13 @@ export default {
           .catch((err) => console.log(err));
       }
     },
+    getImageUrl(imagePath) {
+      return process.env.BE_URL + imagePath;
+    },
   },
   mounted() {
     axios
-      .get("http://localhost:8080/api/product/" + this.$route.params.id)
+      .get(`${process.env.BE_URL}api/product/` + this.$route.params.id)
       .then((response) => {
         this.setProduct(response.data.data);
         this.setImage(response.data.data.imageId);
