@@ -21,6 +21,9 @@
           <li class="nav-item">
             <router-link class="nav-link" to="/foods">Foods</router-link>
           </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/order">Ordered Product</router-link>
+          </li>
         </ul>
         <ul class="navbar-nav mb-2">
           <li class="nav-item">
@@ -50,8 +53,10 @@ export default {
   },
   props: ["updateCart"],
   mounted() {
+    
+    const useragent = localStorage.getItem('useragent');
     axios
-      .get(`${process.env.BE_URL}api/cart`)
+      .post(`${process.env.BE_URL}api/cart/list`, {useragent})
       .then((response) => {
         this.cartValue = response.data.data.length;
       })

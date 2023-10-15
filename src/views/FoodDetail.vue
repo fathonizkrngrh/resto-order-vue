@@ -109,6 +109,7 @@ export default {
       this.$refs.mainImage.src = event.target.src;
     },
     order() {
+      this.orders.useragent = localStorage.getItem('useragent');
       this.orders.productId = this.product;
       if (!this.orders.qty) {
         this.$toast.warning("Please insert your quantity", {
@@ -122,6 +123,7 @@ export default {
           rtl: false,
         });
       } else {
+        console.log(this.orders)
         axios
           .post(
             `${process.env.BE_URL}api/cart/` + this.$route.params.id,

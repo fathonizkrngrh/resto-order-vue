@@ -197,7 +197,7 @@ export default {
     },
     order(event) {
       event.preventDefault();
-      console.log(this.cartOrdered);
+      this.cartOrdered.useragent = localStorage.getItem('useragent');
       axios
         .post(`${process.env.BE_URL}api/order`, this.cartOrdered)
         .then(() => {
@@ -230,8 +230,9 @@ export default {
     },
   },
   mounted() {
+    const useragent = localStorage.getItem('useragent');
     axios
-      .get(`${process.env.BE_URL}api/cart`)
+      .post(`${process.env.BE_URL}api/cart/list`, {useragent})
       .then((response) => {
         this.setProductCart(response.data.data);
       })

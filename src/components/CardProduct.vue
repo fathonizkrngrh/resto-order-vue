@@ -28,10 +28,10 @@
           width="auto"
         />
         <div
-          class="card-disable position-absolute top-50 start-50 translate-middle w-100 h-100"
+          class="card-disable position-absolute align-items-center top-50 start-50 translate-middle w-100 h-100"
           style="background-color: rgba(0, 0, 0, 0.6)"
         >
-          <p class="text-white text-center py-2">Out of Stock</p>
+          <p class="text-white text-center ">Out of Stock</p>
         </div>
       </div>
       <div class="card-body">

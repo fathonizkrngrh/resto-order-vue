@@ -56,11 +56,12 @@ export default {
   },
   methods: {
     setProducts(data) {
-      this.products = data;
+      this.products = data.product;
 
-      if (data.token) {
-      localStorage.setItem('user', data.user);
-    }
+      const useragent = localStorage.getItem('useragent');
+      if (data.useragent && !useragent) {
+        localStorage.setItem('useragent', data.useragent);
+      }
     },
   },
   mounted() {

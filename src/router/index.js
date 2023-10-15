@@ -4,6 +4,7 @@ import HomePage from "../views/HomePage.vue";
 import FoodMenu from "../views/FoodMenu.vue";
 import FoodDetail from "../views/FoodDetail.vue";
 import CartPage from "../views/CartPage.vue";
+import OrderPage from "../views/OrderPage.vue";
 import SuccessOrder from "../views/SuccessOrder.vue";
 
 Vue.use(VueRouter);
@@ -28,6 +29,11 @@ const routes = [
     path: "/food/:id",
     name: "Food Detail",
     component: FoodDetail,
+  },
+  {
+    path: "/order",
+    name: "Ordered Products",
+    component: OrderPage,
   },
   {
     path: "/success-order",

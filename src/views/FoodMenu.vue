@@ -15,7 +15,6 @@
               placeholder="Search your favourite food"
               aria-label="Search your favourite food"
               aria-describedby="search-food"
-              @keyup="searchProducts"
               id="search"
             />
             <span class="input-group-text" id="search-food"
@@ -100,24 +99,23 @@ export default {
     setCategories(data) {
       this.categories = data;
     },
-    searchProducts() {
-      axios
-        .get("http://localhost:3000/products?q=" + this.search)
-        .then((response) => {
-          this.setCategories(response.data.data);
-        })
-        .catch((error) => {
-          this.errored = true;
-          console.log(error.message);
-        });
-    },
+    // searchProducts() {
+    //   axios
+    //     .get("http://localhost:3000/products?q=" + this.search)
+    //     .then((response) => {
+    //       this.setCategories(response.data.data);
+    //     })
+    //     .catch((error) => {
+    //       this.errored = true;
+    //       console.log(error.message);
+    //     });
+    // },
   },
   mounted() {
     axios
       .get(`${process.env.BE_URL}api/category`)
       .then((response) => {
         this.setCategories(response.data.data);
-        console.log("berhasil :", this.categories);
       })
       .catch((error) => {
         this.errored = true;
