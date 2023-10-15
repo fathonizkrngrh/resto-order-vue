@@ -26,11 +26,15 @@
       </div>
 
       <div class="row mt-4">
-        <div class="col-12 col-md-8 table-responsive">
+
+        <div class="col-12">
           <h3 v-if="productCarts.length === 0" class="text-center my-5">
             Card is empty. Choose your
             <router-link to="/foods">foods</router-link> and checkout.
           </h3>
+        </div>
+        <div class="col-12 col-md-8 table-responsive">
+          
           <table class="table align-middle" v-if="productCarts.length > 0">
             <thead>
               <tr>
