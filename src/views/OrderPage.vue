@@ -1,5 +1,5 @@
 <template>
-  <div class="cart">
+  <div class="cart " >
     <NavBar :updateCart="orderedProduct" />
     <div class="container">
       <!-- breadcrumb -->
@@ -23,7 +23,7 @@
       </div>
 
       <div class="row mt-4">
-        <div class="table-responsive">
+        <div class="table-responsive ">
           <h3 v-if="orderedProduct.length === 0" class="text-center my-5">
             Order is empty. Choose your
             <router-link to="/foods">foods</router-link> and order.

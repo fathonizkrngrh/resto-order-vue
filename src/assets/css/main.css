@@ -15,6 +15,12 @@ hr {
 th {
   color: #186F65;
 }
+
+.cart,
+.food-menu {
+  min-height: 760px;
+}
+
 .btn-checkout,
 .badge-success {
   background-color: #186F65;
