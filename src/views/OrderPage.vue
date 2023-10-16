@@ -10,10 +10,7 @@
               <li class="breadcrumb-item text">
                 <router-link to="/" class="text-dark">Home</router-link>
               </li>
-              <li class="breadcrumb-item text">
-                <router-link to="/foods" class="text-dark">Foods</router-link>
-              </li>
-              <li class="breadcrumb-item active" aria-current="page">Ordered Product</li>
+              <li class="breadcrumb-item active" aria-current="page">My Order</li>
             </ol>
           </nav>
         </div>
@@ -21,7 +18,7 @@
 
       <div class="row mt-4">
         <div class="col">
-          <h2>My <strong>Ordered</strong> Product</h2>
+          <h2>My <strong>Ordered</strong> Foods</h2>
         </div>
       </div>
 

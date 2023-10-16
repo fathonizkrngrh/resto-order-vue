@@ -172,6 +172,8 @@ export default {
       this.productCarts = data;
     },
     deleteProductInCart(id) {
+      
+      const useragent = localStorage.getItem('useragent');
       axios.delete(`${process.env.BE_URL}api/cart/` + id).then(() => {
         this.$toast.success("Success delete product", {
           position: "top-right",
@@ -184,15 +186,21 @@ export default {
           rtl: false,
         });
         //update cart
-        axios
-          .get(`${process.env.BE_URL}api/cart`)
+        axios.post(`${process.env.BE_URL}api/cart/list`, {useragent} )
           .then((response) => {
             this.setProductCart(response.data.data);
+            console.log(response.data.data)
           })
           .catch((error) => {
             this.message = error.message;
             console.log(error.message);
           });
+          
+        window.location.reload()
+
+      }).catch((error) => {
+            this.message = error.message;
+            console.log(error.message);
       });
     },
 

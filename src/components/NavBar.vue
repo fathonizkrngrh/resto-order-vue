@@ -21,17 +21,23 @@
           <li class="nav-item">
             <router-link class="nav-link" to="/foods">Foods</router-link>
           </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/order">Ordered Product</router-link>
-          </li>
         </ul>
         <ul class="navbar-nav mb-2">
           <li class="nav-item">
             <router-link class="nav-link" to="/cart"
-              >Keranjang
-              <b-icon-bag class=""></b-icon-bag>
+              >Cart
+              <b-icon-cart class=""></b-icon-cart>
               <p class="badge badge-success ml-1">
                 {{ cartValue || 0 }}
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/order"
+              >My Order
+              <b-icon-bag class=""></b-icon-bag>
+              <p class="badge badge-success ml-1">
+                {{ orderValue || 0 }}
               </p>
             </router-link>
           </li>
@@ -49,6 +55,7 @@ export default {
   data() {
     return {
       cartValue: "",
+      orderValue: ""
     };
   },
   props: ["updateCart"],
@@ -59,6 +66,15 @@ export default {
       .post(`${process.env.BE_URL}api/cart/list`, {useragent})
       .then((response) => {
         this.cartValue = response.data.data.length;
+      })
+      .catch((error) => {
+        this.errored = true;
+        console.log(error.message);
+      });
+    axios
+      .post(`${process.env.BE_URL}api/order/list`, {useragent})
+      .then((response) => {
+        this.orderValue = response.data.data.length;
       })
       .catch((error) => {
         this.errored = true;
