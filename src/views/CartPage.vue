@@ -41,8 +41,8 @@
                 <th scope="col">No.</th>
                 <th scope="col">Product Name</th>
                 <th scope="col">Qty</th>
-                <th scope="col">Price</th>
-                <th scope="col">Total Price</th>
+                <th scope="col" class="text-end">Price</th>
+                <th scope="col" class="text-end">Total Price</th>
                 <th scope="col">Notes</th>
                 <th scope="col">Delete</th>
               </tr>

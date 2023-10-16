@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div v-if="product.isReady === true" class="card shadow card-product">
+    <div v-if="product.isReady === true" class="card shadow border-0 card-product">
       <img
         :src= "getImageUrl(product.imageId[0].imageUrl)"
-        class="card-img-top img-fulid p-1"
+        class="card-img-top img-fulid"
         alt=""
         height="150px"
         width="auto"
@@ -18,11 +18,11 @@
         >
       </div>
     </div>
-    <div v-if="product.isReady === false" class="card shadow card-product">
+    <div v-if="product.isReady === false" class="card shadow border-0 card-product">
       <div class="bg-image">
         <img
           :src="getImageUrl(product.imageId[0].imageUrl)"
-          class="card-img-top img-fulid p-1"
+          class="card-img-top img-fulid"
           alt=""
           height="150px"
           width="auto"

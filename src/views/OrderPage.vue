@@ -35,8 +35,7 @@
                 <th scope="col">Invoice</th>
                 <th scope="col">Table Number</th>
                 <th scope="col">Name</th>
-                <th scope="col">Tax</th>
-                <th scope="col">Total</th>
+                <th scope="col" class="text-end">Total</th>
                 <th scope="col">Status</th>
               </tr>
             </thead>
@@ -49,7 +48,6 @@
                 <td>{{ orderedProduct.invoice }}</td>
                 <td>{{ orderedProduct.tableNumber }}</td>
                 <td>{{ orderedProduct.username }}</td>
-                <td class="text-end">Rp. {{ orderedProduct.tax }}</td>
                 <td class="text-end">
                   <strong>Rp. {{ orderedProduct.total }}</strong>
                 </td>
@@ -88,7 +86,7 @@ export default {
   mounted() {
     const useragent = localStorage.getItem('useragent');
     axios
-      .post(`${process.env.BE_URL}api/order/list`, {useragent})
+      .post(`${process.env.BE_URL}api/order/list`, { useragent })
       .then((response) => {
         this.setOrderedProduct(response.data.data);
       })

@@ -13,24 +13,27 @@ hr {
 }
 
 th {
-  color: #541690;
+  color: #A8DF8E;
 }
 .btn-checkout,
 .badge-success {
-  background-color: #541690;
+  background-color: #A8DF8E;
   color: white;
 }
 
 .btn-checkout:hover {
   background-color: white;
-  color: #541690;
-  border-color: #541690;
+  color: #A8DF8E;
+  border-color: #A8DF8E;
 }
 
-.card-product,
+.card-product {
+  border-radius: 15px;
+}
+
 .card-img-top,
 .card-disable {
-  border-radius: 15px;
+  border-radius: 15px 15px 0 0 ;
 }
 
 .breadcrumb {
@@ -57,4 +60,8 @@ th {
 }
 #main-image {
   height: 400px;
+}
+
+.navbar {
+  background-color: #F3FDE8;
 }
