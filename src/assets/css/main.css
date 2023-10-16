@@ -13,22 +13,23 @@ hr {
 }
 
 th {
-  color: #A8DF8E;
+  color: #186F65;
 }
 .btn-checkout,
 .badge-success {
-  background-color: #A8DF8E;
+  background-color: #186F65;
   color: white;
 }
 
 .btn-checkout:hover {
   background-color: white;
-  color: #A8DF8E;
-  border-color: #A8DF8E;
+  color: #186F65;
+  border-color: #186F65;
 }
 
 .card-product {
   border-radius: 15px;
+
 }
 
 .card-img-top,
@@ -63,5 +64,5 @@ th {
 }
 
 .navbar {
-  background-color: #F3FDE8;
+  background-color: #D0E7D2;
 }

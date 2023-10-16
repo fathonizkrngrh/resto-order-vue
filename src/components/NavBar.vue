@@ -24,21 +24,26 @@
         </ul>
         <ul class="navbar-nav mb-2">
           <li class="nav-item">
-            <router-link class="nav-link" to="/cart"
-              >Cart
-              <b-icon-cart class=""></b-icon-cart>
-              <p class="badge badge-success ml-1">
-                {{ cartValue || 0 }}
-              </p>
+            <router-link class="nav-link" to="/cart">
+              <span class="d-flex align-items-center">
+                Cart
+                <b-icon-cart class=""></b-icon-cart>
+                <p class="badge badge-success ml-1">
+                  {{ cartValue || 0 }}
+                </p>
+
+              </span>
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/order"
-              >My Order
-              <b-icon-bag class=""></b-icon-bag>
-              <p class="badge badge-success ml-1">
-                {{ orderValue || 0 }}
-              </p>
+            <router-link class="nav-link " to="/order">
+              <span class="d-flex align-items-center">
+                  My Order
+                <b-icon-bag class=""></b-icon-bag>
+                <p class="badge badge-success ml-1">
+                  {{ orderValue || 0 }}
+                </p>
+              </span>
             </router-link>
           </li>
         </ul>
