@@ -38,8 +38,8 @@
                 <th scope="col">Invoice</th>
                 <th scope="col">Table Number</th>
                 <th scope="col">Name</th>
-                <th scope="col">Total</th>
                 <th scope="col">Tax</th>
+                <th scope="col">Total</th>
                 <th scope="col">Status</th>
               </tr>
             </thead>

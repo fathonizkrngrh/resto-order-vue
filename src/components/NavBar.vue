@@ -31,7 +31,7 @@
               >Keranjang
               <b-icon-bag class=""></b-icon-bag>
               <p class="badge badge-success ml-1">
-                {{ updateCart ? updateCart.length : cartValue || 0 }}
+                {{ cartValue || 0 }}
               </p>
             </router-link>
           </li>
