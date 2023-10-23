@@ -66,9 +66,9 @@ export default {
   props: ["updateCart"],
   mounted() {
     
-    const useragent = localStorage.getItem('useragent');
+    const userId = localStorage.getItem('userId');
     axios
-      .post(`${process.env.BE_URL}api/cart/list`, {useragent})
+      .post(`${process.env.BE_URL}api/cart/list`, {userId})
       .then((response) => {
         this.cartValue = response.data.data.length;
       })
@@ -77,7 +77,7 @@ export default {
         console.log(error.message);
       });
     axios
-      .post(`${process.env.BE_URL}api/order/list`, {useragent})
+      .post(`${process.env.BE_URL}api/order/list`, {userId})
       .then((response) => {
         this.orderValue = response.data.data.length;
       })

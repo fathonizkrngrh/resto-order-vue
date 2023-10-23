@@ -58,9 +58,9 @@ export default {
     setProducts(data) {
       this.products = data.product;
 
-      const useragent = localStorage.getItem('useragent');
-      if (data.useragent && !useragent) {
-        localStorage.setItem('useragent', data.useragent);
+      const userId = localStorage.getItem('userId');
+      if (data.userId && !userId) {
+        localStorage.setItem('userId', data.userId);
       }
     },
   },

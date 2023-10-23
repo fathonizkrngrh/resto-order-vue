@@ -109,7 +109,7 @@ export default {
       this.$refs.mainImage.src = event.target.src;
     },
     order() {
-      this.orders.useragent = localStorage.getItem('useragent');
+      this.orders.userId = localStorage.getItem('userId');
       this.orders.productId = this.product;
       if (!this.orders.qty) {
         this.$toast.warning("Please insert your quantity", {

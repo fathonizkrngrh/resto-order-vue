@@ -84,9 +84,9 @@ export default {
     },
   },
   mounted() {
-    const useragent = localStorage.getItem('useragent');
+    const userId = localStorage.getItem('userId');
     axios
-      .post(`${process.env.BE_URL}api/order/list`, { useragent })
+      .post(`${process.env.BE_URL}api/order/list`, { userId })
       .then((response) => {
         this.setOrderedProduct(response.data.data);
       })

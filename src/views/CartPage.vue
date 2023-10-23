@@ -55,9 +55,9 @@
                 <th scope="row">{{ index + 1 }}</th>
                 <td>{{ productCart.productId.name }}</td>
                 <td>{{ productCart.qty }}</td>
-                <td class="text-end">Rp. {{ productCart.productId.price }}</td>
+                <td class="text-end">Rp. {{ productCart.priceRupiah }}</td>
                 <td class="text-end">
-                  <strong>Rp. {{ productCart.subtotal }}</strong>
+                  <strong>Rp. {{ productCart.subtotalRupiah }}</strong>
                 </td>
                 <td>
                   {{ productCart.notes }}
@@ -154,6 +154,7 @@
 <script>
 import NavBar from "../components/NavBar.vue";
 import axios from "axios";
+import {formatRupiah} from "../helper/formatter"
 
 export default {
   name: "CartPage",
@@ -169,11 +170,19 @@ export default {
   },
   methods: {
     setProductCart(data) {
-      this.productCarts = data;
+      const formattedData = data.map(item => {
+        const subtotalRupiah = formatRupiah(item.subtotal)
+        const priceRupiah = formatRupiah(item.productId.price)
+        return {
+          ...item,
+          subtotalRupiah, priceRupiah
+        }
+      })
+      this.productCarts = formattedData;
     },
     deleteProductInCart(id) {
       
-      const useragent = localStorage.getItem('useragent');
+      const userId = localStorage.getItem('userId');
       axios.delete(`${process.env.BE_URL}api/cart/` + id).then(() => {
         this.$toast.success("Success delete product", {
           position: "top-right",
@@ -186,7 +195,7 @@ export default {
           rtl: false,
         });
         //update cart
-        axios.post(`${process.env.BE_URL}api/cart/list`, {useragent} )
+        axios.post(`${process.env.BE_URL}api/cart/list`, {userId} )
           .then((response) => {
             this.setProductCart(response.data.data);
             console.log(response.data.data)
@@ -205,11 +214,11 @@ export default {
     },
 
     tax(subtotalPrice) {
-      return subtotalPrice * 0.1;
+      return (subtotalPrice * 0.1);
     },
     order(event) {
       event.preventDefault();
-      this.cartOrdered.useragent = localStorage.getItem('useragent');
+      this.cartOrdered.userId = localStorage.getItem('userId');
       axios
         .post(`${process.env.BE_URL}api/order`, this.cartOrdered)
         .then(() => {
@@ -242,9 +251,9 @@ export default {
     },
   },
   mounted() {
-    const useragent = localStorage.getItem('useragent');
+    const userId = localStorage.getItem('userId');
     axios
-      .post(`${process.env.BE_URL}api/cart/list`, {useragent})
+      .post(`${process.env.BE_URL}api/cart/list`, {userId})
       .then((response) => {
         this.setProductCart(response.data.data);
       })
@@ -267,6 +276,13 @@ export default {
       return this.productCarts.reduce(function (item, data) {
         return item + data.productId.price * data.qty;
       }, 0);
+    },
+    formatRupiah(uang) {
+      let reverse = uang.toString().split('').reverse().join(''); // Ubah angka menjadi string, balik urutannya
+      let ribuan = reverse.match(/\d{1,3}/g); // Pisahkan menjadi grup-grup tiga angka
+    
+      let formatted = ribuan.join('.').split('').reverse().join(''); // Gabungkan dengan titik dan balik urutan lagi
+      return formatted;
     },
   },
 };
