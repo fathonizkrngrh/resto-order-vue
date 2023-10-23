@@ -33,8 +33,8 @@
             <router-link to="/foods">foods</router-link> and checkout.
           </h3>
         </div>
-        <div class="col-12 col-md-8 table-responsive">
-          <table class="table table-borderless card pt-4" v-if="productCarts.length > 0">
+        <div class="col-12 col-md-8 p-4 border rounded" >
+          <table class="table table-responsive pt-4"  v-if="productCarts.length > 0">
             <tbody>
               <tr
                 v-for="(productCart) in productCarts"
@@ -43,10 +43,10 @@
                 <td>
                   <div class="d-flex mb-2">
                     <div class="flex-shrink-0">
-                      <img :src="getImageUrl(productCart.productId.imageId[0].imageUrl)" alt="" width="35" class="img-fluid">
+                      <img :src="getImageUrl(productCart.productId.imageId[0].imageUrl)" alt="" width="50" class="img-fluid">
                     </div>
                     <div class="flex-lg-grow-1 ms-3">
-                      <h6 class="small mb-0"><a :href="'/food/'+ productCart.productId._id" class="text-reset">{{ productCart.productId.name }}</a></h6>
+                      <h6 class="medium mb-0"><a :href="'/food/'+ productCart.productId._id" class="text-reset">{{ productCart.productId.name }}</a></h6>
                       <span class="small">  {{ productCart.notes }}</span>
                     </div>
                   </div>
@@ -59,8 +59,6 @@
           </table>
         </div>
         <div class="col-0 col-md-4 fixed" v-if="productCarts.length > 0">
-          
-          
           <div class="card">
             <div class="card-body">
               <p class="text-right"><strong>Preview Order</strong></p>

@@ -59,6 +59,11 @@ th, .card-title {
   margin-bottom: 10px;
 }
 
+#cart-list {
+  border: 1px solid #f00; /* 2px width, solid line, green color */
+  border-radius: 10px;
+}
+
 #image-tab:hover {
   opacity: 1;
 }
