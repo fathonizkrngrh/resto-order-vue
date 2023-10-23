@@ -1,21 +1,21 @@
 <template>
   <div>
-    <div v-if="product.isReady === true" class="card shadow border-0 card-product">
+    <div v-if="product.isReady === true" class="card border-0 card-product  d-flex flex-column align-items-center">
       <img
         :src= "getImageUrl(product.imageId[0].imageUrl)"
         class="rounded-circle img-fulid mx-2 mt-4 d-md-none"
         alt=""
-        height="120px"
-        width="auto"
+        height="130px"
+        width="130px"
       />
       <img
         :src= "getImageUrl(product.imageId[0].imageUrl)"
-        class="rounded-circle img-fulid mx-4 my-4 d-none d-md-block"
+        class="rounded-circle img-fulid mx-4 mt-4 d-none d-md-block"
         alt=""
-        height="200px"
-        width="auto"
+        height="220px"
+        width="220px"
       />
-      <div class="card-body d-flex flex-column align-items-center">
+      <div class="card-body d-flex flex-column align-items-center my-4">
         <h6 class="card-title fw-bold lh-sm text-center text-md text-lg-md">{{ product.name }}</h6>
         <p class="card-text my-3">Rp. {{ formatRupiah(product.price) }}</p>
         <router-link
