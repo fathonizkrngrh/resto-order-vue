@@ -34,56 +34,81 @@
           </h3>
         </div>
         <div class="col-12 col-md-8 table-responsive">
-          <table class="table table-borderless card pt-4" v-if="productCarts.length > 0">
+          
+          <table class="table align-middle" v-if="productCarts.length > 0">
+            <thead>
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Qty</th>
+                <th scope="col" class="text-end">Price</th>
+                <th scope="col" class="text-end">Total Price</th>
+                <th scope="col">Notes</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
             <tbody>
               <tr
-                v-for="(productCart) in productCarts"
+                v-for="(productCart, index) in productCarts"
                 :key="productCart._id"
               >
-                <td>
-                  <div class="d-flex mb-2">
-                    <div class="flex-shrink-0">
-                      <img :src="getImageUrl(productCart.productId.imageId[0].imageUrl)" alt="" width="35" class="img-fluid">
-                    </div>
-                    <div class="flex-lg-grow-1 ms-3">
-                      <h6 class="small mb-0"><a :href="'/food/'+ productCart.productId._id" class="text-reset">{{ productCart.productId.name }}</a></h6>
-                      <span class="small">  {{ productCart.notes }}</span>
-                    </div>
-                  </div>
-                </td>
+                <th scope="row">{{ index + 1 }}</th>
+                <td>{{ productCart.productId.name }}</td>
                 <td>{{ productCart.qty }}</td>
-                <td class="text-end">Rp. {{ productCart.subtotalRupiah }}</td>
+                <td class="text-end">Rp. {{ productCart.priceRupiah }}</td>
+                <td class="text-end">
+                  <strong>Rp. {{ productCart.subtotalRupiah }}</strong>
+                </td>
+                <td>
+                  {{ productCart.notes }}
+                </td>
+                <td>
+                  <b-icon-trash
+                    @click="deleteProductInCart(productCart._id)"
+                  ></b-icon-trash>
+                </td>
               </tr>
             </tbody>
-            
           </table>
         </div>
         <div class="col-0 col-md-4 fixed" v-if="productCarts.length > 0">
-          
-          
           <div class="card">
             <div class="card-body">
               <p class="text-right"><strong>Preview Order</strong></p>
-              <table  class="table table-borderless">
-                <tbody>
-                  <tr>
-                    <td colspan="1">Total Items</td>
-                    <td class="text-end" colspan="2">{{ productCarts.length }}</td>
-                  </tr>
-                  <tr>
-                    <td colspan="1">Subtotal</td>
-                    <td class="text-end" colspan="2">Rp. {{ totalBeforeTax }}</td>
-                  </tr>
-                  <tr>
-                    <td colspan="1">Tax (10%)</td>
-                    <td class="text-end" colspan="2">Rp. {{ tax(totalBeforeTax) }}</td>
-                  </tr>
-                  <tr class="fw-bold">
-                    <td colspan="2">TOTAL</td>
-                    <td class="text-end">Rp. {{ tax(totalBeforeTax) + totalBeforeTax }}</td>
-                  </tr>
-                </tbody>
-              </table>
+              <div class="row">
+                <div class="col-7">
+                  <p>Subtotal {{ productCarts.length }} products</p>
+                </div>
+                <div class="col-5">
+                  <p class="text-end">
+                    <strong>Rp. {{ totalBeforeTax }}</strong>
+                  </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-7">
+                  <p>Tax (10%)</p>
+                </div>
+                <div class="col-5">
+                  <p class="text-end">
+                    <strong>Rp. {{ tax(totalBeforeTax) }}</strong>
+                  </p>
+                </div>
+              </div>
+
+              <hr />
+              <div class="row">
+                <div class="col-5">
+                  <p>Price Total</p>
+                </div>
+                <div class="col-7">
+                  <h4 class="text-end">
+                    <strong
+                      >Rp. {{ tax(totalBeforeTax) + totalBeforeTax }}</strong
+                    >
+                  </h4>
+                </div>
+              </div>
               <div class="row mt-3">
                 <form @submit="order">
                   <div class="mb-3">
@@ -187,9 +212,7 @@ export default {
             console.log(error.message);
       });
     },
-    getImageUrl(imagePath) {
-      return process.env.BE_URL + imagePath;
-    },
+
     tax(subtotalPrice) {
       return (subtotalPrice * 0.1);
     },
@@ -233,7 +256,6 @@ export default {
       .post(`${process.env.BE_URL}api/cart/list`, {userId})
       .then((response) => {
         this.setProductCart(response.data.data);
-        console.log(response.data.data)
       })
       .catch((error) => {
         console.log(error.message);

@@ -26,7 +26,7 @@
           <div class="row">
             <img
               :src= "getImageUrl(images[0].imageUrl)"
-              class="img-fulid shadow w-100"
+              class="img-fluid w-auto"
               alt=""
               id="main-image"
               ref="mainImage"

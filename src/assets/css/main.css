@@ -8,12 +8,17 @@
   font-weight: bold;
 }
 
+.hero {
+  background-color: #D8FBE9;
+  border-radius: 20px
+}
+
 hr {
   height: 5px;
 }
 
-th {
-  color: #186F65;
+th, .card-title {
+  color: #196338;
 }
 
 .cart,
@@ -23,25 +28,22 @@ th {
 
 .btn-checkout,
 .badge-success {
-  background-color: #186F65;
+  background-color: #196338;
   color: white;
+  border-radius: 50px
 }
 
 .btn-checkout:hover {
   background-color: white;
-  color: #186F65;
-  border-color: #186F65;
+  color: #196338;
+  border-color: #196338;
 }
 
 .card-product {
   border-radius: 15px;
-
+  background: linear-gradient(to bottom, #ffffff, #D8FBE9)
 }
 
-.card-img-top,
-.card-disable {
-  border-radius: 15px 15px 0 0 ;
-}
 
 .breadcrumb {
   background-color: transparent;
@@ -65,10 +67,7 @@ th {
   cursor: pointer;
   height: 80px;
 }
-#main-image {
+/* #main-image {
   height: 400px;
-}
+} */
 
-.navbar {
-  background-color: #D0E7D2;
-}
