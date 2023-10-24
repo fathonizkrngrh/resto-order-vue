@@ -9,7 +9,7 @@
               <h1 class="fs-1">
                 <strong>Satisfy your cravings </strong><br />with a few clicks!
               </h1>
-              <p>Order your favorite dishes from our menu online from your table.</p>
+              <p>Order your favorite dishes from your table.</p>
               <router-link to="/foods" class="btn btn-md btn-checkout"
                 ><b-icon-arrow-right></b-icon-arrow-right> Order</router-link
               >
@@ -48,7 +48,7 @@
               <h2 class="fs-1 hl-lg">
                 <strong>Satisfy your cravings </strong><br />with a few clicks!
               </h2>
-              <p>Order your favorite dishes from our menu online from your table.</p>
+              <p>Order your favorite dishes from your table.</p>
               <button class="btn btn-md btn-checkout mx-auto">Checkout</button>
             </div>
           </div>
