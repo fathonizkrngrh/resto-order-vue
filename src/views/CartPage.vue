@@ -33,8 +33,8 @@
             <router-link to="/foods">foods</router-link> and checkout.
           </h3>
         </div>
-        <div class="col-12 col-md-8 p-4 border rounded" >
-          <table class="table table-responsive pt-4"  v-if="productCarts.length > 0">
+        <div class="col-12 col-md-8 p-4 border rounded" v-if="productCarts.length > 0">
+          <table class="table table-responsive pt-4"  >
             <tbody>
               <tr
                 v-for="(productCart) in productCarts"
@@ -47,12 +47,17 @@
                     </div>
                     <div class="flex-lg-grow-1 ms-3">
                       <h6 class="medium mb-0"><a :href="'/food/'+ productCart.productId._id" class="text-reset">{{ productCart.productId.name }}</a></h6>
-                      <span class="small">  {{ productCart.notes }}</span>
+                      <span class="small">Notes :  {{ productCart.notes }}</span>
                     </div>
                   </div>
                 </td>
                 <td>{{ productCart.qty }}</td>
                 <td class="text-end">Rp. {{ productCart.subtotalRupiah }}</td>
+                <td>
+                  <b-icon-trash
+                    @click="deleteProductInCart(productCart._id)"
+                  ></b-icon-trash>
+                </td>
               </tr>
             </tbody>
             

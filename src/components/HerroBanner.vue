@@ -3,7 +3,7 @@
     <!-- Desktop -->
     <div class="d-none d-md-block p-4">
       <div class="row mt-4">
-        <div class="col-md-6">
+        <div class="col-md-6 ">
           <div class="d-flex h-100">
             <div class="justify-content-center align-self-center">
               <h1 class="fs-1">
